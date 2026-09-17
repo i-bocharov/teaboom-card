@@ -14,7 +14,7 @@
   "homepage": "https://github.com/i-bocharov/teaboom-card",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
