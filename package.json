@@ -1,0 +1,26 @@
+{
+  "name": "teaboom-card",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Адаптивная карточка товара для интернет-магазина Teaboom.ru.",
+  "author": {
+    "name": "Igor Bocharov",
+    "url": "https://github.com/i-bocharov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/i-bocharov/teaboom-card.git"
+  },
+  "homepage": "https://github.com/i-bocharov/teaboom-card",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.104.1",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  }
+}
