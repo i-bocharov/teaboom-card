@@ -78,4 +78,54 @@ packages.forEach((option, index) => {
   optionsContainer.append(button);
 });
 
+const imageButton = document.querySelector<HTMLButtonElement>(
+  '.product-card__image',
+);
+const imageDialog = document.querySelector<HTMLDialogElement>(
+  '.product-card__image-dialog',
+);
+const imageDialogCloseButton = document.querySelector<HTMLButtonElement>(
+  '.product-card__image-dialog-close',
+);
+
+const openImageDialog = (): void => {
+  if (!imageDialog || imageDialog.open) {
+    return;
+  }
+
+  imageDialog.classList.remove('is-closing');
+  imageDialog.showModal();
+};
+
+const closeImageDialog = (): void => {
+  if (!imageDialog?.open || imageDialog.classList.contains('is-closing')) {
+    return;
+  }
+
+  imageDialog.classList.add('is-closing');
+
+  window.setTimeout(() => {
+    imageDialog.close();
+    imageDialog.classList.remove('is-closing');
+    imageButton?.blur();
+  }, 400);
+};
+
+if (imageButton && imageDialog && imageDialogCloseButton) {
+  imageButton.addEventListener('click', openImageDialog);
+
+  imageDialogCloseButton.addEventListener('click', closeImageDialog);
+
+  imageDialog.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeImageDialog();
+  });
+
+  imageDialog.addEventListener('click', (event) => {
+    if (event.target === imageDialog) {
+      closeImageDialog();
+    }
+  });
+}
+
 updateProductInfo(packages[0]);
