@@ -1,7 +1,7 @@
 import './style.scss';
 
 interface PackageOption {
-  weight: string;
+  weight: number;
   article: string;
   price: number;
   oldPrice: number;
@@ -9,25 +9,25 @@ interface PackageOption {
 
 const packages: PackageOption[] = [
   {
-    weight: '100 г',
+    weight: 100,
     article: '01306',
     price: 326.4,
     oldPrice: 349.2,
   },
   {
-    weight: '500 г',
+    weight: 500,
     article: '01307',
     price: 1432,
     oldPrice: 1646,
   },
   {
-    weight: '1000 г',
+    weight: 1000,
     article: '01308',
     price: 2064,
     oldPrice: 2592,
   },
   {
-    weight: '5000 г',
+    weight: 5000,
     article: '01309',
     price: 6320,
     oldPrice: 8710,
@@ -63,7 +63,7 @@ packages.forEach((option, index) => {
 
   button.type = 'button';
   button.className = 'product-card__option';
-  button.textContent = option.weight;
+  button.textContent = `${option.weight} г`;
   button.setAttribute('aria-pressed', String(index === 0));
 
   button.addEventListener('click', () => {
