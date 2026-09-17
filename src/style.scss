@@ -143,7 +143,7 @@ main {
 .product-card__options {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
+  gap: 26px;
   margin-bottom: 28px;
 }
 
@@ -421,12 +421,7 @@ main {
 
 @media (min-width: 768px) and (max-width: 900px) {
   .product-card__options {
-    gap: 2px;
-  }
-
-  .product-card__option {
-    min-width: 0;
-    width: 84px;
+    gap: 4px;
   }
 }
 

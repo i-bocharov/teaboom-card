@@ -42,9 +42,8 @@ const priceElement = document.querySelector<HTMLElement>('#product-price');
 const oldPriceElement =
   document.querySelector<HTMLElement>('#product-old-price');
 
-if (!optionsContainer || !articleElement || !priceElement || !oldPriceElement) {
+if (!optionsContainer || !articleElement || !priceElement || !oldPriceElement)
   throw new Error('Не удалось найти элементы карточки товара');
-}
 
 const formatPrice = (price: number): string =>
   `${price.toLocaleString('ru-RU', {
@@ -58,6 +57,9 @@ const updateProductInfo = (option: PackageOption): void => {
   oldPriceElement.textContent = formatPrice(option.oldPrice);
 };
 
+let selectedPackage = packages[0];
+const optionButtons: HTMLButtonElement[] = [];
+
 packages.forEach((option, index) => {
   const button = document.createElement('button');
 
@@ -67,14 +69,15 @@ packages.forEach((option, index) => {
   button.setAttribute('aria-pressed', String(index === 0));
 
   button.addEventListener('click', () => {
-    document
-      .querySelectorAll<HTMLButtonElement>('.product-card__option')
-      .forEach((item) => item.setAttribute('aria-pressed', 'false'));
+    selectedPackage = option;
+
+    optionButtons.forEach((item) => item.setAttribute('aria-pressed', 'false'));
 
     button.setAttribute('aria-pressed', 'true');
-    updateProductInfo(option);
+    updateProductInfo(selectedPackage);
   });
 
+  optionButtons.push(button);
   optionsContainer.append(button);
 });
 
@@ -89,22 +92,21 @@ const imageDialogCloseButton = document.querySelector<HTMLButtonElement>(
 );
 
 const openImageDialog = (): void => {
-  if (!imageDialog || imageDialog.open) {
-    return;
-  }
+  if (!imageDialog || imageDialog.open) return;
 
   imageDialog.classList.remove('is-closing');
   imageDialog.showModal();
 };
 
 const closeImageDialog = (): void => {
-  if (!imageDialog?.open || imageDialog.classList.contains('is-closing')) {
+  if (!imageDialog?.open || imageDialog.classList.contains('is-closing'))
     return;
-  }
 
   imageDialog.classList.add('is-closing');
 
   window.setTimeout(() => {
+    if (!imageDialog.open) return;
+
     imageDialog.close();
     imageDialog.classList.remove('is-closing');
     imageButton?.blur();
@@ -122,10 +124,8 @@ if (imageButton && imageDialog && imageDialogCloseButton) {
   });
 
   imageDialog.addEventListener('click', (event) => {
-    if (event.target === imageDialog) {
-      closeImageDialog();
-    }
+    if (event.target === imageDialog) closeImageDialog();
   });
 }
 
-updateProductInfo(packages[0]);
+updateProductInfo(selectedPackage);
